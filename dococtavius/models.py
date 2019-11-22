@@ -1,14 +1,31 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
-class GhostPost(models.Model):
-    ghostTitle = models.CharField(max_length=50)
-    body = models.TextField(max_length=280)
-    is_boast = models.BooleanField(default=False)
-    post_date = models.DateTimeField(default=timezone.now)
-    goodvote = models.IntegerField(default=0)
-    badvote = models.IntegerField(default=0)
-    totalvotes = models.IntegerField(default=0)
+class Ticket(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.TextField(max_length=280)
+    user_ticket = models.ForeignKey(User,on_delete=models.CASCADE)
+    time_date = models.DateTimeField(default=timezone.now)
+    assigneduser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='bloodsign')
+    completeuser = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True, related_name='finisher')
+    NEW = 'N'
+    IN_PROGRESS = 'IP'
+    DONE = 'D'
+    INVALID = 'I'
+    TICKET_STAT_CHOICES = [
+        (NEW, 'New'),
+        (IN_PROGRESS, 'IN Progress'),
+        (DONE, 'Done'),
+        (INVALID, 'Invalid'),
+        (TICKET_STAT_CHOICES, 'Ticket_Stat_Choices')
+    ]
+    ticket_stats = models.CharField(
+        max_length=180,
+        choices=TICKET_STAT_CHOICES,
+        default=NEW,
+    )
+
 
     def __str__(self):
-        return f"{self.ghostTitle} - {self.ghostAuthor.name}"
+        return f"{self.title} - {self.user_ticket.name}"
