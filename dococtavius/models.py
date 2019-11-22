@@ -18,7 +18,6 @@ class Ticket(models.Model):
         (IN_PROGRESS, 'IN Progress'),
         (DONE, 'Done'),
         (INVALID, 'Invalid'),
-        (TICKET_STAT_CHOICES, 'Ticket_Stat_Choices')
     ]
     ticket_stats = models.CharField(
         max_length=180,
