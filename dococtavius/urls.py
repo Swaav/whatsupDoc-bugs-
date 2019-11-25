@@ -16,8 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from . import views
+from .models import Ticket
+
+admin.site.register(Ticket)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='homepage'),
-    path('GhostAdd/', views.GhostPost_view, name='addghostpage'),
+    path('ticketaddform/', views.newticket_view_form, name='newticket'),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('edit/<int:id>/', views.edit_ticket_view, name='edit'),
+    path('dev/<int:id>/', views.dev_view, name='dev'),
+    path('ticket/<int:id>/', views.ticket_view, name='ticket')
 ]

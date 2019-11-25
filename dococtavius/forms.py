@@ -1,10 +1,23 @@
 from django import forms
 from . import models
+from .models import Ticket
 
-class TicketAdd(forms.ModelForm):
+
+class TicketAddForm(forms.ModelForm):
     class Meta:
-        model = models.Ticket
-        fields = ['title', 'description',]
+        model = Ticket
+        fields = [
+            'title',
+            'description',
+            'ticket_stats',
+            'assigneduser'
+        ]
+        widgets = {
+            'ticket': forms.RadioSelect
+        }
+
+
+form = TicketAddForm()
 
 
 class LoginForm(forms.Form):
@@ -12,7 +25,4 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-class EditForm(models.Form):
-     class Meta:
-        model = models.Ticket
-        fields = ['title', 'description','ticket_stats', 'assigneduser']
+

@@ -1,19 +1,57 @@
-<h1> Oh its Ghost Time </h1>
+<a href='/ticketaddform/'>New Ticket</a>
+<a href='/login/'>Login</a>
+<a href='/logout/'>Logout</a>
+<h1>TheGoldenTicket</h1>
 
-<ol>
-    {% for foo in data %}
-        <li>{{ foo.title }}{{ foo.description }}</a></li>
-        <ul>
-            <li>{{ foo.is_boast }}{{foo.post_date}}{{foo.totalvotes}}<button><a href='/down/{{foo.id}}'>Dislikes</a></button> 
-                <button><a href='/up/{{foo.id}}'>Likes</a></button></li>
-        </ul>
-        <br>
+<ul style='list-style:none'>
+    {% for data in new %}
+        <a href='/edit/{{ data.id }}/'>Edit</a>
+        <h1>
+            <a href='/ticket/{{ data.id }}/'>{{data.title}}</a>
+        </h1>
+        <h3>{{ data.ticket_stats }}</h3>
+        <h3>{{ data.bloodsign }}</h3>
+        <h3>{{ data.finisher }}</h3>
+        <h3>{{ data.creator }}</h3>
+
     {% endfor %}
-        <hr>
+</ul>
 
-        <a style ="border: 1px solid sienna; padding: 2px;" href="/GhostAdd/">boastORroast</a>
-        <a style ="border: 1px solid sienna; padding: 2px;" href="/roast/">Roast</a>
-        <a style ="border: 1px solid sienna; padding: 2px;" href="/boast/">Boast</a>
-        <a style ="border: 1px solid sienna; padding: 2px;" href="/sort/">whosPopular</a>
-   
-</ol>
+<ul style='list-style:none'>
+    {% for data in in_progress %}
+        <a href='/edit/{{ data.id }}/'>Edit</a>
+        <h1>
+            <a href='/ticket/{{ data.id }}/'>{{data.title}}</a>
+        </h1>
+        <h3>{{ data.ticket_stats }}</h3>
+        <h3>{{ data.bloodsign }}</h3>
+        <h3>{{ data.finisher }}</h3>
+
+    {% endfor %}
+</ul>
+
+<ul style='list-style:none'>
+    {% for data in done %}
+        <a href='/edit/{{ data.id }}/'>Edit</a>
+        <h1>
+            <a href='/ticket/{{ data.id }}/'>{{data.title}}</a>
+        </h1>
+        <h3>{{ data.ticket_stats }}</h3>
+        <h3>{{ data.bloodsign }}</h3>
+        <h3>{{ data.finisher }}</h3>
+
+    {% endfor %}
+</ul>
+
+<ul style='list-style:none'>
+    {% for data in invalid %}
+        <a href='/edit/{{ data.id }}/'>Edit</a>
+        <h1>
+            <a href='/ticket/{{ data.id }}/'>{{data.title}}</a>
+        </h1>
+        <h3>{{ data.ticket_stats }}</h3>
+        <h3>{{ data.bloodsign }}</h3>
+        <h3>{{ data.finisher }}</h3>
+
+    {% endfor %}
+</ul>

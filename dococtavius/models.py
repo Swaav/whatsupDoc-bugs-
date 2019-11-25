@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Ticket(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=280)
-    user_ticket = models.ForeignKey(User,on_delete=models.CASCADE)
+    user_ticket = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True, related_name='creator')
     time_date = models.DateTimeField(default=timezone.now)
     assigneduser = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='bloodsign')
     completeuser = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True, related_name='finisher')
