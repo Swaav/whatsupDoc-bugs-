@@ -27,4 +27,4 @@ class Ticket(models.Model):
 
 
     def __str__(self):
-        return f"{self.title} - {self.user_ticket.name}"
+        return f"{self.title} - {self.user_ticket.username}"

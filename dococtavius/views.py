@@ -10,13 +10,13 @@ def index(request):
     html = 'index.html'
 
     new = Ticket.objects.filter(
-        ticket_stats='New').order_by('-time_date')
+        ticket_stats=Ticket.NEW).order_by('-time_date')
     in_progress = Ticket.objects.filter(
-        ticket_stats='IN Progress').order_by('-time_date')
+        ticket_stats=Ticket.IN_PROGRESS).order_by('-time_date')
     done = Ticket.objects.filter(
-        ticket_stats='Done').order_by('-time_date')
+        ticket_stats='D').order_by('-time_date')
     invalid = Ticket.objects.filter(
-        ticket_stats='Invalid').order_by('-time_date')
+        ticket_stats='I').order_by('-time_date')
 
     return render(request, html, {
         'new': new,
@@ -54,9 +54,9 @@ def newticket_view_form(request):
 def dev_view(request, id):
     html = 'devine.html'
 
-    created = Ticket.objects.filter(creator=id)
-    assigned = Ticket.objects.filter(bloodsign=id)
-    completed = Ticket.objects.filter(finisher=id)
+    created = Ticket.objects.filter(user_ticket=id)
+    assigned = Ticket.objects.filter(assigneduser=id)
+    completed = Ticket.objects.filter(completeuser=id)
 
     return render(request, html,
                   {'created': created,
@@ -129,7 +129,7 @@ def edit_ticket_view(request, id):
             instance.assigned_by = instance.bloodsign
             instance.completed_by = None
             form.save()
-        elif instance.assigned_by is not None:
+        elif instance.assigneduser is not None:
             instance.ticket_stats = 'IN Progress'
             instance.completed_by = None
             form.save()
